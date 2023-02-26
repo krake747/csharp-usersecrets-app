@@ -1,5 +1,4 @@
-﻿
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Extensions.Configuration;
 
@@ -39,8 +38,7 @@ internal record Password(string Value)
         return (Convert.ToHexString(hash), salt);
     }
 
-    internal bool Verify(string hash, byte[] salt, HashAlgorithmName hashAlgorithm, int keySize,
-        int iterations)
+    internal bool Verify(string hash, byte[] salt, HashAlgorithmName hashAlgorithm, int keySize, int iterations)
     {
         var hashToCompare = Rfc2898DeriveBytes.Pbkdf2(Value, salt, iterations, hashAlgorithm, keySize);
         return hashToCompare.SequenceEqual(Convert.FromHexString(hash));
