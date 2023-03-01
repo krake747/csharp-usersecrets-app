@@ -54,7 +54,7 @@ var secretContainers = json != string.Empty
     : new List<SecretContainer>();
 
 var exit = false;
-while (verifiedMasterSecret && userSecretsFileInfo.Exists && !exit)
+while (!exit)
 {
     var key = ReadLine("Enter User Key: ", Console.Write);
     var secretContainer = secretContainers.FirstOrDefault(u => u.Key == key);
