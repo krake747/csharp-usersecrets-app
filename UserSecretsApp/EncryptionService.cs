@@ -3,7 +3,7 @@ using System.Text;
 
 namespace UserSecretsApp;
 
-internal class EncryptionService
+internal sealed class EncryptionService
 {
     private readonly HashAlgorithmName _hashAlgorithm;
     private readonly int _iterations;
