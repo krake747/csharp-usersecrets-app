@@ -51,7 +51,7 @@ internal sealed class EncryptionService
 
     internal (byte[] Hash, byte[] Salt) CreateHash(string secret)
     {
-        var secretBytes = Encoding.UTF8.GetBytes(secret);
+        var secretBytes = Encoding.Unicode.GetBytes(secret);
         var salt = RandomNumberGenerator.GetBytes(_keyLength);
         var hash = Rfc2898DeriveBytes.Pbkdf2(secretBytes, salt, _iterations, _hashAlgorithm, _keyLength);
         return (hash, salt);

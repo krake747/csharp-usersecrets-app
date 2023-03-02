@@ -5,7 +5,6 @@ using Serilog;
 using TextCopy;
 using UserSecretsApp;
 
-
 var config = CreateConfig();
 var log = CreateLogger(config);
 
@@ -56,7 +55,7 @@ if (!currentDir.Exists)
 }
 
 log.Information("Vault directory exists");
-var userSecretsFileInfo = new FileInfo(Path.Combine(currentDir.FullName, "secrets-container.json"));
+var userSecretsFileInfo = new FileInfo(Path.Combine(currentDir.FullName, "sample-secrets-container.json"));
 
 if (!userSecretsFileInfo.Exists)
 {
@@ -79,7 +78,6 @@ do
     if (secretContainer is null)
     {
         log.Information("Secret container was not found");
-        Console.WriteLine();
         Console.WriteLine($"User key - {key} - not found...");
         var newKey = ReadLine("Enter New User Key: ", Console.Write);
         var newName = ReadLine("Enter New User Name: ", Console.Write);
@@ -97,7 +95,6 @@ do
 
         log.Information("New Secret container was added");
         Console.WriteLine("New Secret container added...");
-        Console.WriteLine();
 
         secretContainers.Add(newSecretContainer);
         continue;
@@ -128,8 +125,6 @@ var jsonString = JsonSerializer.Serialize(secretContainers, options);
 
 log.Information("Clearing clipboard");
 await ClipboardService.SetTextAsync("");
-
-Console.WriteLine();
 
 Console.WriteLine("Saving file...");
 File.WriteAllText(userSecretsFileInfo.FullName, jsonString);
