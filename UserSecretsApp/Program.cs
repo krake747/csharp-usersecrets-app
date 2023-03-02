@@ -55,7 +55,7 @@ if (!currentDir.Exists)
 }
 
 log.Information("Vault directory exists");
-var userSecretsFileInfo = new FileInfo(Path.Combine(currentDir.FullName, "sample-secrets-container.json"));
+var userSecretsFileInfo = new FileInfo(Path.Combine(currentDir.FullName, config["SecretContainerFile"]!));
 
 if (!userSecretsFileInfo.Exists)
 {
